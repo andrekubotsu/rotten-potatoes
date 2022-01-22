@@ -23,7 +23,7 @@ jobs:
           push: true
           tags: |
             andrekubotsu/rotten-potatoes:latest
-            andrekubotsu/rotten-potatoes:&{{ github.run_number }}
+            andrekubotsu/rotten-potatoes:${{ github.run_number }}
           
     
     
