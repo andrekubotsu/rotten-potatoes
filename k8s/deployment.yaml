@@ -4,7 +4,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: mongodb
-spec: 
+spec:
   selector:
     matchLabels:
       app: mongodb
@@ -25,14 +25,13 @@ spec:
               value: mongopwd
 
 ---
-
 # Service MongoDB
 
 apiVersion: v1
 kind: Service
-metadata: 
+metadata:
   name: mongodb
-spec: 
+spec:
   selector:
     app: mongodb
   ports:
@@ -40,19 +39,18 @@ spec:
   type: ClusterIP
 
 ---
-
 # App deployment - Rotten Potatoes
 
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: web
-spec: 
+spec:
   selector:
     matchLabels:
       app: web
   template:
-    metadata: 
+    metadata:
       labels:
         app: web
     spec:
@@ -74,16 +72,15 @@ spec:
               value: mongopwd
 
 ---
-
 apiVersion: v1
 kind: Service
-metadata: 
+metadata:
   name: web
-spec: 
+spec:
   selector:
     app: web
   ports:
     - port: 80
       targetPort: 5000
       nodePort: 30000
-  type: NodePort
+  type: LoadBalancer
